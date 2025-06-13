@@ -331,7 +331,20 @@ def dia_con_mayor_ingresos(datos, mes, año):
     print(f"Total facturado: ${detalles[dia_mayor_ingresos]['total_facturado']}")
     print(f"Cantidad total de ingresos: {detalles[dia_mayor_ingresos]['total_actividades']}")
     print(f"Tipo de pase más comprado: {pase_mas_comprado}")
-
+def ver_actividades_socio(datos, id_socio):
+    # Muestra las actividades de un socio específico.
+    actividades = [dato for dato in datos if dato["id_socio"] == id_socio]
+    
+    if not actividades:
+        print(f"No se encontraron actividades para el socio con ID {id_socio}.")
+        return
+    
+    print(f"Actividades del socio ID {id_socio}:")
+    for actividad in actividades:
+        fecha = actividad["fecha"].strftime('%d/%m/%Y')
+        tipo_socio = actividad["tipo_socio"]
+        pase_comprado = actividad["pase_comprado"]
+        print(f"Fecha: {fecha}, Tipo Socio: {tipo_socio}, Pase Comprado: {pase_comprado}")
 def menu_principal(datos, mes, año):
     """Muestra el menú principal y gestiona las opciones."""
     while True:
@@ -342,6 +355,7 @@ def menu_principal(datos, mes, año):
         print("4. Detalle por día")
         print("5. Detalle del día")
         print("6. Día con mayor ingresos")
+        print("7. Buscar socio y ver sus actividades")
         print("8. Salir")
         print()
         
@@ -360,6 +374,17 @@ def menu_principal(datos, mes, año):
             detalle_del_dia(datos, mes, año)
         elif opcion == "6":
             dia_con_mayor_ingresos(datos, mes, año)
+        elif opcion == "7":
+            while True:
+                try:
+                    id_socio = int(input("Ingrese el ID del socio (4 dígitos): "))
+                    if 1000 <= id_socio < 10000:
+                        ver_actividades_socio(datos, id_socio)
+                        break
+                    else:
+                        print("ID inválido. Debe ser un número de 4 dígitos.")
+                except ValueError:
+                    print("Entrada inválida. Ingrese un número.")
         elif opcion == "8":
             print("Saliendo del programa...")
             break
