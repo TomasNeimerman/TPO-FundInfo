@@ -299,17 +299,17 @@ def detalle_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo
     sorted_daily_summary = sorted(daily_summary.items())
 
     print(f"\n--- Detalle por Día para {obtener_nombre_mes(mes)} {anio} ---")
-    print(f"{'Día':<10} {'Total ingresos por dia':<25} {'Total facturado':<20} {'Total costo':<15}")
+    print(f"{'Día'} {'Total ingresos por dia'} {'Total facturado'} {'Total costo'}")
     print("-" * 75)
 
     for day, data in sorted_daily_summary:
-        print(f"{day}/{mes}/{anio:<5} {data['total_actividades']:<25} ${data['total_facturado']:<19.2f} ${data['total_costo']:<14.2f}")
+        print(f"{day}/{mes}/{anio} {data['total_actividades']} ${data['total_facturado']} ${data['total_costo']}")
     print("-" * 75)
     print()
 
-def detalle_actividades_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio):
+def detalle_actividades_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias):
 
-    dia_elegido = leer_entero("Ingrese el día (1-28) para ver las actividades: ", 1, 28)
+    dia_elegido = leer_entero(f"Ingrese el día (1-{cant_dias}) para ver las actividades: ", 1, cant_dias)
     
     actividades_del_dia = []
     for i in range(len(fechas_dia)):
@@ -431,7 +431,7 @@ def menu_principal(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_
         elif opcion == "4":
             detalle_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias)
         elif opcion == "5":
-            detalle_actividades_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio)
+            detalle_actividades_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias)
         elif opcion == "6":
             dia_con_mayor_ingresos(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias)
         elif opcion == "7":
