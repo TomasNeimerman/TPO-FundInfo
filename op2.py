@@ -326,27 +326,6 @@ def detalle_actividades_por_dia(fechas_dia, fechas_mes, fechas_anio, ids_socio, 
     for actividad in actividades_del_dia:
         print(f"{actividad['id']}\t\t{actividad['tipo_socio']}\t\t{actividad['pase']}")
 
-def ver_actividades_socio(datos, id_socio_a_buscar):
-
-    actividades_encontradas = []
-    encontrado = False 
-    for actividad in datos:
-        
-        if actividad["id_socio"] == id_socio_a_buscar:
-            actividades_encontradas.append(actividad)
-            encontrado = True 
-
-    if not encontrado:
-        print(f"No se encontraron actividades para el socio con ID {id_socio_a_buscar}.")
-        return
-
-    print(f"Actividades del socio ID {id_socio_a_buscar}:")
-    for actividad in actividades_encontradas:
-        fecha = actividad["fecha"]
-        tipo_socio = actividad["tipo_socio"]
-        pase_comprado = actividad["pase_comprado"]
-        print(f"Fecha: {fecha}, Tipo Socio: {tipo_socio}, Pase Comprado: {pase_comprado}")
-
 
 def dia_con_mayor_ingresos(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias):
 
@@ -403,6 +382,28 @@ def dia_con_mayor_ingresos(fechas_dia, fechas_mes, fechas_anio, ids_socio, indic
         print(f"Tipo de pase más comprado: {most_purchased_pass}")
     else:
         print("No se pudieron determinar el día con mayores ingresos.")
+
+def ver_actividades_socio(datos, id_socio_a_buscar):
+
+    actividades_encontradas = []
+    encontrado = False 
+    for actividad in datos:
+        
+        if actividad["id_socio"] == id_socio_a_buscar:
+            actividades_encontradas.append(actividad)
+            encontrado = True 
+
+    if not encontrado:
+        print(f"No se encontraron actividades para el socio con ID {id_socio_a_buscar}.")
+        return
+
+    print(f"Actividades del socio ID {id_socio_a_buscar}:")
+    for actividad in actividades_encontradas:
+        fecha = actividad["fecha"]
+        tipo_socio = actividad["tipo_socio"]
+        pase_comprado = actividad["pase_comprado"]
+        print(f"Fecha: {fecha}, Tipo Socio: {tipo_socio}, Pase Comprado: {pase_comprado}")
+
 
 def menu_principal(fechas_dia, fechas_mes, fechas_anio, ids_socio, indices_tipo_socio, indices_pase, mes, anio, cant_dias):
     opcion = ""
